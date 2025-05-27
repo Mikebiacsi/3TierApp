@@ -76,6 +76,12 @@ jobs:
         cd .github/azure-three-tier-app/infrastructure
         terraform apply -auto-approve
 
+    - name: Upload Terraform Plan
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-plan
+        path: ./terraform.tfplan
+
     - name: Deploy Logic App
       run: |
         az logic workflow create \
