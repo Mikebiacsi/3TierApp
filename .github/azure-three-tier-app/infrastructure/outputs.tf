@@ -2,18 +2,18 @@ output "frontdoor_endpoint" {
   value = module.frontdoor.frontdoor_endpoint
 }
 
-output "appservice_url" {
-  value = module.appservice.appservice_url
-}
-
-output "logicapp_url" {
-  value = module.logicapps.logicapp_url
-}
-
 output "sql_connection_string" {
-  value = module.sql.sql_connection_string
+  value = module.sql.connection_string
 }
 
-output "vnet_subnet_ids" {
-  value = module.networking.subnet_ids
+output "app_service_url" {
+  value = module.appservice.app_service_url
+}
+
+output "logic_app_url" {
+  value = module.logicapps.logic_app_url
+}
+
+output "vnet_id" {
+  value = module.networking.vnet_id
 }

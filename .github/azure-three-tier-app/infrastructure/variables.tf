@@ -1,13 +1,11 @@
 variable "resource_group_name" {
-  description = "The name of the resource group where the resources will be deployed."
+  description = "The name of the resource group."
   type        = string
-  default     = "3-tier-app-rg"
 }
 
 variable "location" {
-  description = "The Azure region where the resources will be deployed."
+  description = "The Azure region for deployment."
   type        = string
-  default     = "uksouth"
 }
 
 variable "frontdoor_name" {
@@ -58,12 +56,6 @@ variable "frontend_host_name" {
   type        = string
 }
 
-variable resource_group_name {
-  description = "The name of the routing rule for Azure Front Door."
-  type        = string
-  default     = "3-tier-app-rg"
-}
-
 variable "vnet_name" {
   description = "The name of the Virtual Network"
   type        = string
@@ -71,8 +63,9 @@ variable "vnet_name" {
 }
 
 variable "address_space" {
-  description = "The address space for the Virtual Network"
+  description = "The address space for the virtual network."
   type        = list(string)
+  default     = ["10.0.0.0/16"]
 }
 
 variable "subnet_names" {
@@ -89,8 +82,15 @@ variable "app_subnet_name" {
   default     = "app-subnet"
 }
 variable "app_subnet_prefix" {
-  description = "The address prefix for the App Service subnet"
+  description = "The prefix for the app subnet."
   type        = list(string)
+  default     = ["10.0.1.0/24"]
+}
+
+variable "db_subnet_prefix" {
+  description = "The prefix for the database subnet."
+  type        = list(string)
+  default     = ["10.0.2.0/24"]
 }
 
 variable "app_service_plan_id" {
@@ -106,34 +106,19 @@ variable "workflow_name" {
 
 }
 
-variable workflow_definition {
-  description = "The JSON definition of the Logic App workflow."
+variable "workflow_definition" {
+  description = "The workflow definition for the Logic App."
   type        = string
-  default     = jsonencode({
-    "$schema" = "https://schema.management.azure.com/schemas/2016-06-01/workflowdefinition.json#",
-    "actions" = {},
-    "triggers" = {
-      "manual" = {
-        "type" = "Request",
-        "inputs" = {
-          "schema" = {}
-        }
-      }
-    },
-    "outputs" = {}
-  })
 }
 
 variable "key_vault_name" {
   description = "The name of the Azure Key Vault."
   type        = string
   default = "storage01"
-
 }
 
 variable "key_vault_resource_group" {
-  description = "The name of the resource group where the Key Vault is located."
+  description = "The resource group where the Key Vault is located."
   type        = string
-  default = "KeyVault01"
-
+  default     = "KeyVault01"
 }

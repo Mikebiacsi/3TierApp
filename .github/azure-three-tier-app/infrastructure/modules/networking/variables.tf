@@ -5,9 +5,9 @@ variable "vnet_name" {
 }
 
 variable "address_space" {
-  description = "The address space for the Virtual Network"
+  description = "The address space for the virtual network."
   type        = list(string)
-  default     = "10.0.0/16"
+  default     = ["10.0.0.0/16"]
 }
 
 variable "subnet_names" {
@@ -37,9 +37,9 @@ variable "app_subnet_name" {
   default     = "app-subnet"
 }
 variable "app_subnet_prefix" {
-  description = "The address prefix for the App Service subnet"
+  description = "The prefix for the app subnet."
   type        = list(string)
-  default     = "app"
+  default     = ["10.0.1.0/24"]
 }
 variable "db_subnet_name" {
   description = "The name of the Database subnet"
@@ -47,9 +47,9 @@ variable "db_subnet_name" {
   default     = "db-subnet"
 }
 variable "db_subnet_prefix" {
-  description = "The address prefix for the Database subnet"
+  description = "The prefix for the database subnet."
   type        = list(string)
-  default     = "db"
+  default     = ["10.0.2.0/24"]
 }
 variable "app_service_plan_name" {
   description = "The name of the App Service Plan"
