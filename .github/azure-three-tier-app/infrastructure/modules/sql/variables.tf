@@ -36,3 +36,15 @@ variable "geo_replicated_database_name" {
   type        = string
   default     = ""
 }
+
+variable resource_group_name {
+  description = "The name of the routing rule for Azure Front Door."
+  type        = string
+  default     = "3-tier-app-rg"
+}
+
+variable "location" {
+  description = "The Azure region where the SQL resources will be deployed."
+  type        = string
+  default     = "uksouth"
+}

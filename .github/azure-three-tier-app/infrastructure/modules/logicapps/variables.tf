@@ -1,6 +1,7 @@
 variable "logic_app_name" {
   description = "The name of the Logic App."
   type        = string
+  default     = "3-tier-app-logicapp"
 }
 
 variable "resource_group_name" {
@@ -13,7 +14,33 @@ variable "location" {
   type        = string
 }
 
-variable "workflow_definition" {
+variable "workflow_name" {
+  description = "The name of the Logic App workflow."
+  type        = string
+  default     = "3-tier-app-workflow"
+
+}
+
+variable resource_group_name {
+  description = "The name of the routing rule for Azure Front Door."
+  type        = string
+  default     = "3-tier-app-rg"
+}
+
+variable workflow_definition {
   description = "The JSON definition of the Logic App workflow."
   type        = string
+  default     = jsonencode({
+    "$schema" = "https://schema.management.azure.com/schemas/2016-06-01/workflowdefinition.json#",
+    "actions" = {},
+    "triggers" = {
+      "manual" = {
+        "type" = "Request",
+        "inputs" = {
+          "schema" = {}
+        }
+      }
+    },
+    "outputs" = {}
+  })
 }

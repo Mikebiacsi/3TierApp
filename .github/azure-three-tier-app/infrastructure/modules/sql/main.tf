@@ -25,10 +25,27 @@ resource "azurerm_sql_database_geo_backup" "example" {
   location    = var.geo_location
 }
 
+# Create Azure Key Vault
+resource "azurerm_key_vault" "example" {
+  name                        = "${var.resource_group_name}-kv"
+  location                    = var.location
+  resource_group_name         = var.resource_group_name
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  sku_name                    = "standard"
+  purge_protection_enabled    = false
+}
+
 output "sql_server_id" {
   value = azurerm_sql_server.example.id
 }
 
-output "sql_database_connection_string" {
-  value = "Server=tcp:${azurerm_sql_server.example.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_sql_database.example.name};Persist Security Info=False;User ID=${var.administrator_login};Password=${var.administrator_login_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+
+
+# Output Key Vault details
+output "key_vault_id" {
+  value = azurerm_key_vault.example.id
+}
+
+output "key_vault_uri" {
+  value = azurerm_key_vault.example.vault_uri
 }

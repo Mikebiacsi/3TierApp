@@ -1,7 +1,7 @@
 resource "azurerm_frontdoor" "main" {
   name                = var.frontend_host_name
   resource_group_name = var.resource_group_name
-  location            = var.location
+  # location attribute removed as it is not supported
 
   frontend_endpoint {
     name      = var.frontend_endpoint_name
@@ -19,6 +19,24 @@ resource "azurerm_frontdoor" "main" {
       priority    = 1
       weight      = 100
     }
+
+    health_probe_name      = var.health_probe_name # Added required attribute
+    load_balancing_name    = var.load_balancing_name # Added required attribute
+  }
+
+  backend_pool_health_probe {
+    name                = var.health_probe_name # Added required block
+    # backend_pool_id attribute removed as it is not supported
+    path                = "/"
+    interval_in_seconds = 30
+    # target_url attribute removed as it is not supported
+  }
+
+  backend_pool_load_balancing {
+    name                             = var.load_balancing_name # Added required block
+    additional_latency_milliseconds  = 0
+    sample_size                      = 4
+    successful_samples_required      = 2
   }
 
   routing_rule {
@@ -26,10 +44,9 @@ resource "azurerm_frontdoor" "main" {
     accepted_protocols = ["Http", "Https"]
     patterns_to_match  = ["/*"]
     frontend_endpoints = [azurerm_frontdoor.frontend_endpoint.name]
-    backend_pool_id    = azurerm_frontdoor.backend_pool.id
     redirect_configuration {
+      redirect_protocol = "MatchRequest"
       redirect_type = "Found"
-      target_url    = "https://${var.frontend_host_name}"
     }
   }
 
