@@ -1,0 +1,40 @@
+name: Terraform
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Terraform Init
+        run: terraform init ./infrastructure
+
+      - name: Terraform Plan
+        run: terraform plan ./infrastructure
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve ./infrastructure
+
+      - name: Terraform Output
+        run: terraform output -json > terraform_output.json
+
+      - name: Upload Terraform Output
+        uses: actions/upload-artifact@v2
+        with:
+          name: terraform-output
+          path: terraform_output.json

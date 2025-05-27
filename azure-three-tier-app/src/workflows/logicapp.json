@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "httpRequest": {
+      "type": "object",
+      "defaultValue": {
+        "method": "GET",
+        "uri": "https://example.com/api/data"
+      }
+    }
+  },
+  "triggers": {
+    "httpTrigger": {
+      "type": "Http",
+      "kind": "Http",
+      "inputs": {
+        "method": "@{parameters('httpRequest').method}",
+        "uri": "@{parameters('httpRequest').uri}"
+      }
+    }
+  },
+  "actions": {
+    "response": {
+      "type": "Response",
+      "inputs": {
+        "statusCode": 200,
+        "body": {
+          "message": "Hello from Logic Apps!"
+        }
+      }
+    }
+  },
+  "outputs": {}
+}
