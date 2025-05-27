@@ -30,6 +30,7 @@ jobs:
         run: |
           cd .github/azure-three-tier-app/src/backend
           pip install -r requirements.txt
+          pip install pytest
 
       - name: Run backend tests
         run: |
