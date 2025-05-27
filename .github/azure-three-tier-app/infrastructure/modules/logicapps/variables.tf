@@ -4,11 +4,6 @@ variable "logic_app_name" {
   default     = "3-tier-app-logicapp"
 }
 
-variable "resource_group_name" {
-  description = "The name of the resource group where the Logic App will be deployed."
-  type        = string
-}
-
 variable "location" {
   description = "The Azure region where the Logic App will be deployed."
   type        = string

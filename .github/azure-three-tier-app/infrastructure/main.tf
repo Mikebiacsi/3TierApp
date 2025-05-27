@@ -66,14 +66,3 @@ data "azurerm_key_vault_secret" "sql_admin_password" {
   name         = "sql-admin-password"
   key_vault_id = data.azurerm_key_vault.example.id
 }
-output "app_service_url" {
-  value = module.appservice.app_url
-}
-
-output "logic_app_url" {
-  value = module.logicapps.logic_app_url
-}
-
-output "sql_connection_string" {
-  value = module.sql.connection_string
-}

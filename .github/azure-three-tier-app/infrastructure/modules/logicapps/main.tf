@@ -5,6 +5,3 @@ resource "azurerm_logic_app_workflow" "this" {
   # Removed invalid sku block
 }
 
-output "logic_app_url" {
-  value = azurerm_logic_app_workflow.this.id
-}

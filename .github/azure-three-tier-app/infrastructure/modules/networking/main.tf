@@ -19,10 +19,6 @@ resource "azurerm_subnet" "db_subnet" {
   address_prefixes     = var.db_subnet_prefix
 }
 
-output "vnet_id" {
-  value = azurerm_virtual_network.main.id
-}
-
 output "app_subnet_id" {
   value = azurerm_subnet.app_subnet.id
 }
