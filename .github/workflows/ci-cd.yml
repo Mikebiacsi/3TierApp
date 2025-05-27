@@ -23,13 +23,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd src/backend
+          cd path/to/your/backend
           pip install -r requirements.txt
 
       - name: Run backend tests
         run: |
-          cd src/backend
-          pytest
+            cd .github/azure-three-tier-app/src/backend
+            pytest
 
       - name: Build frontend
         run: |
