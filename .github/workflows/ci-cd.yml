@@ -58,17 +58,17 @@ jobs:
 
     - name: Terraform Init
       run: |
-        cd infrastructure
+        cd cd .github/azure-three-tier-app/infrastructure
         terraform init
 
     - name: Terraform Plan
       run: |
-        cd infrastructure
+        cd cd .github/azure-three-tier-app/infrastructure
         terraform plan
 
     - name: Terraform Apply
       run: |
-        cd infrastructure
+        cd cd .github/azure-three-tier-app/infrastructure
         terraform apply -auto-approve
 
     - name: Deploy Logic App
