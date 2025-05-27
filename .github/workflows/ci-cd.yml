@@ -56,6 +56,11 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.6 # Specify the desired Terraform version
+
     - name: Terraform Init
       run: |
         cd .github/azure-three-tier-app/infrastructure
@@ -73,4 +78,7 @@ jobs:
 
     - name: Deploy Logic App
       run: |
-        az logic app deploy --resource-group <your-resource-group> --name <your-logic-app-name> --source <path-to-your-logicapp.json>
+        az logic workflow create \
+          --resource-group <your-resource-group> \
+          --name <your-logic-app-name> \
+          --definition @.github/azure-three-tier-app/src/workflows/logicapp.json
