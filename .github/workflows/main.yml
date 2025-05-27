@@ -1,0 +1,70 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          cd src/backend
+          pip install -r requirements.txt
+
+      - name: Run backend tests
+        run: |
+          cd src/backend
+          pytest
+
+      - name: Build frontend
+        run: |
+          cd src/frontend
+          npm install
+          npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Log in to Azure
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Terraform Init
+      run: |
+        cd infrastructure
+        terraform init
+
+    - name: Terraform Plan
+      run: |
+        cd infrastructure
+        terraform plan
+
+    - name: Terraform Apply
+      run: |
+        cd infrastructure
+        terraform apply -auto-approve
+
+    - name: Deploy Logic App
+      run: |
+        az logic app deploy --resource-group <your-resource-group> --name <your-logic-app-name> --source <path-to-your-logicapp.json>
