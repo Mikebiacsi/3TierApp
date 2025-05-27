@@ -66,11 +66,6 @@ data "azurerm_key_vault_secret" "sql_admin_password" {
   name         = "sql-admin-password"
   key_vault_id = data.azurerm_key_vault.example.id
 }
-
-output "frontdoor_endpoint" {
-  value = module.frontdoor.frontdoor_endpoint
-}
-
 output "app_service_url" {
   value = module.appservice.app_url
 }
