@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document outlines the high-level design for migrating and modernizing a three-tier enterprise application to Microsoft Azure. The solution is designed for global access, high availability (99.99%), strong security controls, and compliance with regulations such as GDPR. Infrastructure will be provisioned using **Terraform** and automated through **Azure DevOps** pipelines.
+This document outlines the high-level design for migrating and modernizing a three-tier enterprise application to Microsoft Azure. The solution is designed for global access, high availability (99.99%), strong security controls, and compliance with regulations such as GDPR. Infrastructure will be provisioned using **Terraform** and automated through **GitHub Actions**.
 
 ---
 
