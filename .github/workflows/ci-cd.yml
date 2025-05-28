@@ -82,6 +82,12 @@ jobs:
         name: terraform-plan
         path: ./terraform.tfplan
 
+    - name: Upload Terraform Output
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-output
+        path: terraform_output.json
+
     - name: Deploy Logic App
       run: |
         az logic workflow create \
