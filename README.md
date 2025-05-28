@@ -142,6 +142,6 @@ Azure SQL Database (Data Tier, Geo-Replication)
 
 ## Authors
 
-- Solution Architect: *[Your Name]*
-- Date: *[YYYY-MM-DD]*
+- Solution Architect: *Mike Biacsi*
+- Date: *27/05/2025*
 
