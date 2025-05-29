@@ -22,10 +22,10 @@ jobs:
           terraform_version: 1.0.0
 
       - name: Terraform Init
-        run: terraform -chdir=..github/azure-three-tier-app/infrastructure init
+        run: terraform -chdir= .github/azure-three-tier-app/infrastructure init
 
       - name: Terraform Plan
-        run: terraform -chdir=.github/azure-three-tier-app/infrastructure plan
+        run: terraform -chdir= .github/azure-three-tier-app/infrastructure plan
 
       - name: Terraform Apply
         run: terraform -chdir= .github/azure-three-tier-app/infrastructure apply -auto-approve
