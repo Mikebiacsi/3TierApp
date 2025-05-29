@@ -83,8 +83,8 @@ Azure SQL Database (Data Tier, Geo-Replication)
 
 ## DevOps & Automation
 
-- **Source Control**: Azure Repos (Git)  
-- **CI/CD Pipeline**: Azure Pipelines
+- **Source Control**: GitHub
+- **CI/CD Pipeline**: GitHub Actions
   - Code build, test, and deployment stages
   - Infrastructure provisioning via **Terraform**
 - **Infrastructure as Code (IaC)**:
