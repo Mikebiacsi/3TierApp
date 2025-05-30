@@ -48,3 +48,15 @@ variable "location" {
   type        = string
   default     = "uksouth"
 }
+
+variable "database_sku" {
+  description = "The SKU name for the Azure SQL Database."
+  type        = string
+  default     = "Basic"
+}
+
+variable "database_name" {
+  description = "The name of the SQL database."
+  type        = string
+  default     = "3tierdb"
+}

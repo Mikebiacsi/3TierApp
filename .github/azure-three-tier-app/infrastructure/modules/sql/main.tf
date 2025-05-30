@@ -1,28 +1,19 @@
-resource "azurerm_sql_server" "example" {
+resource "azurerm_mssql_server" "example" {
   name                         = var.sql_server_name
   resource_group_name          = var.resource_group_name
   location                     = var.location
   version                      = "12.0"
-  administrator_login          = var.administrator_login
-  administrator_login_password = var.administrator_login_password
+  administrator_login          = var.sql_admin_username
+  administrator_login_password = var.sql_admin_password
 }
 
-resource "azurerm_sql_database" "example" {
-  name                = var.database_name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  server_name         = azurerm_sql_server.example.name
-  sku {
-    name     = var.database_sku
-    tier     = var.database_tier
-    capacity = var.database_capacity
-  }
-  geo_redundant_backup_enabled = true
-}
-
-resource "azurerm_sql_database_geo_backup" "example" {
-  database_id = azurerm_sql_database.example.id
-  location    = var.geo_location
+resource "azurerm_mssql_database" "example" {
+  name           = var.sql_database_name
+  server_id      = azurerm_mssql_server.example.id
+  sku_name       = var.database_sku
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  max_size_gb    = 5
+  zone_redundant = false
 }
 
 # Create Azure Key Vault
@@ -36,7 +27,7 @@ resource "azurerm_key_vault" "example" {
 }
 
 output "sql_server_id" {
-  value = azurerm_sql_server.example.id
+  value = azurerm_mssql_server.example.id
 }
 
 
